@@ -16,6 +16,8 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
 import OTPTextInput from "../components/OTPTextInput";
 import BtnStyle from "../constants/BtnStyle";
+import HeadingStyle from "../constants/HeadingStyle";
+import LinkStyle from "../constants/LinkStyle";
 
 type Props = NativeStackScreenProps<RootStackParamList, "OTPVerification">;
 
@@ -24,108 +26,40 @@ const OTPVerificationScreen: React.FC<Props> = ({
 }) => {
   return (
     <SafeAreaView>
-      <View
-        style={{
-          padding: Spacing * 2,
-        }}
-      >
-        <View
-          style={{
-            alignItems: "center",
-          }}
-        >
-          <Text
-            style={{
-              fontSize: FontSize.xLarge,
-              color: Colors.primary,
-              fontFamily: Font["poppins-bold"],
-              marginVertical: Spacing * 3,
-            }}
-          >
+      <View style={styles.container}>
+        <View style={styles.headingsContainer}>
+          <Text style={HeadingStyle.text}>
             OTP has been sent to your number via SMS
           </Text>
         </View>
-        <View
-          style={{
-            alignItems: "center",
-          }}
-        >
+        <View style={styles.imageContainer}>
           <Image
             source={require("../../assets/images/otp.png")}
-            style={{
-              height: 200,
-              width: 200,
-            }}
+            style={styles.image}
           />
         </View>
         <View style={{}}>
           <OTPTextInput placeholder="_  _  _  _  _  _" />
         </View>
-
         <View>
-          <Text
-            style={{
-              fontFamily: Font["poppins-semiBold"],
-              fontSize: FontSize.small,
-              color: Colors.primary,
-              alignSelf: "flex-start",
-            }}
-          >
+          <Text style={styles.otpInfo}>
             Enter OTP sent to +91XXXXXXXXXX via SMS
           </Text>
         </View>
-
         <TouchableOpacity
           onPress={() => navigate("Profile")}
-          style={[
-            BtnStyle.BtnContainer,
-            {
-              marginTop: 7 * Spacing,
-            },
-          ]}
+          style={[BtnStyle.container, styles.loginWithOTPBtn]}
         >
-          <Text
-            style={{
-              fontFamily: Font["poppins-bold"],
-              color: Colors.onPrimary,
-              textAlign: "center",
-              fontSize: FontSize.large,
-            }}
-          >
-            Login with OTP
-          </Text>
+          <Text style={BtnStyle.text}>Login with OTP</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.primaryLink}>
+          <Text style={LinkStyle.primary}>Resend OTP</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{
-            padding: Spacing * 2,
-          }}
+          onPress={() => navigate("Login")}
+          style={styles.secondaryLink}
         >
-          <Text
-            style={{
-              fontFamily: Font["poppins-bold"],
-              color: Colors.text,
-              textAlign: "center",
-              fontSize: FontSize.medium,
-              textDecorationLine: "underline",
-            }}
-          >
-            Resend OTP
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            padding: Spacing,
-          }}
-        >
-          <Text
-            style={{
-              fontFamily: Font["poppins-semiBold"],
-              color: Colors.text,
-              textAlign: "center",
-              fontSize: FontSize.small,
-              textDecorationLine: "underline",
-            }}
-          >
+          <Text style={LinkStyle.secondary}>
             Not your Number? Click Here to change
           </Text>
         </TouchableOpacity>
@@ -136,4 +70,34 @@ const OTPVerificationScreen: React.FC<Props> = ({
 
 export default OTPVerificationScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: Spacing * 2,
+  },
+  headingsContainer: {
+    alignItems: "center",
+  },
+  imageContainer: {
+    alignItems: "center",
+  },
+  image: {
+    height: 200,
+    width: 200,
+  },
+  otpInfo: {
+    fontFamily: Font["poppins-semiBold"],
+    fontSize: FontSize.small,
+    color: Colors.primary,
+    alignSelf: "flex-start",
+    opacity: 0.8
+  },
+  primaryLink: {
+    padding: Spacing * 2,
+  },
+  secondaryLink: {
+    padding: Spacing,
+  },
+  loginWithOTPBtn: {
+    marginTop: 7 * Spacing,
+  },
+});

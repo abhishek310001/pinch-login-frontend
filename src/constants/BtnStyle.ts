@@ -3,7 +3,7 @@ import Font from "./Font";
 import FontSize from "./FontSize";
 import Spacing from "./Spacing";
 
-const BtnContainer = {
+const container = {
   padding: Spacing * 2,
   backgroundColor: Colors.primary,
   marginVertical: Spacing * 3,
@@ -16,7 +16,7 @@ const BtnContainer = {
   shadowOpacity: 0.3,
   shadowRadius: Spacing,
 };
-const BtnText = {
+const text = {
   fontFamily: Font["poppins-bold"],
   color: Colors.onPrimary,
   textAlign: "center",
@@ -24,6 +24,6 @@ const BtnText = {
 };
 
 export default {
-  BtnContainer,
-  BtnText,
+  container,
+  text,
 };

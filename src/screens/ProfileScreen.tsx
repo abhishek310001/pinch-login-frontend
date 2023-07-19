@@ -10,92 +10,71 @@ import {
 import React from "react";
 import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
-import Colors from "../constants/Colors";
 import Font from "../constants/Font";
-import { Ionicons } from "@expo/vector-icons";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
 import AppTextInput from "../components/AppTextInput";
 import BtnStyle from "../constants/BtnStyle";
+import HeadingStyle from "../constants/HeadingStyle";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
 
 const ProfileScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
   return (
     <SafeAreaView>
-      <View
-        style={{
-          padding: Spacing * 2,
-        }}
-      >
-        <View
-          style={{
-            alignItems: "center",
-          }}
-        >
-          <Text
-            style={{
-              fontSize: FontSize.xLarge,
-              color: Colors.primary,
-              fontFamily: Font["poppins-bold"],
-              marginVertical: Spacing * 3,
-            }}
-          >
-            Profile Page
-          </Text>
-          <Text
-            style={{
-              fontFamily: Font["poppins-regular"],
-              fontSize: FontSize.small,
-              maxWidth: "80%",
-              textAlign: "center",
-            }}
-          >
+      <View style={styles.container}>
+        <View style={styles.headingContainer}>
+          <Text style={HeadingStyle.text}>Profile Page</Text>
+          <Text style={styles.headingDescription}>
             Create an account so you can explore
           </Text>
         </View>
-        <View
-          style={{
-            marginVertical: Spacing * 3,
-            alignItems: "center",
-          }}
-        >
+        <View style={styles.profileImageContainer}>
           <Image
             source={require("../../assets/images/profile.jpg")}
-            style={{
-              height: 100,
-              width: 100,
-              borderRadius: 150 / 2,
-              borderWidth: 3,
-              borderColor: "black",
-            }}
+            style={styles.profileImage}
           />
         </View>
-        <View
-          style={{
-            marginVertical: Spacing * 3,
-          }}
-        >
+        <View style={styles.inputsContainer}>
           <AppTextInput placeholder="First Name" />
           <AppTextInput placeholder="Last Name" />
           <AppTextInput placeholder="E-mail" />
         </View>
-
-        <TouchableOpacity style={BtnStyle.BtnContainer}>
-          <Text
-            style={{
-              fontFamily: Font["poppins-bold"],
-              color: Colors.onPrimary,
-              textAlign: "center",
-              fontSize: FontSize.large,
-            }}
-          >
-            Sign up
-          </Text>
+        <TouchableOpacity style={BtnStyle.container}>
+          <Text style={BtnStyle.text}>Sign up</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: Spacing * 2,
+  },
+  headingContainer: {
+    alignItems: "center",
+  },
+  headingDescription: {
+    fontFamily: Font["poppins-regular"],
+    fontSize: FontSize.small,
+    maxWidth: "80%",
+    textAlign: "center",
+  },
+  profileImageContainer: {
+    marginVertical: Spacing * 3,
+    alignItems: "center",
+  },
+  profileImage: {
+    height: 100,
+    width: 100,
+    borderRadius: 150 / 2,
+    borderWidth: 3,
+    borderColor: "black",
+  },
+  inputsContainer: {
+    marginVertical: Spacing * 3,
+  },
+});
 
 export default ProfileScreen;
