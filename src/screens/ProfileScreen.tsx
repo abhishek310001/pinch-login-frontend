@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
 import Font from "../constants/Font";
@@ -16,10 +16,29 @@ import { RootStackParamList } from "../types";
 import AppTextInput from "../components/AppTextInput";
 import BtnStyle from "../constants/BtnStyle";
 import HeadingStyle from "../constants/HeadingStyle";
+import * as ImagePicker from "expo-image-picker";
+import dummyProfile from "../../assets/images/profile.jpg";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
 
+const dummyProfileUri = Image.resolveAssetSource(dummyProfile).uri;
+
 const ProfileScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
+  const [image, setImage] = useState(dummyProfileUri);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -30,10 +49,14 @@ const ProfileScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
           </Text>
         </View>
         <View style={styles.profileImageContainer}>
-          <Image
-            source={require("../../assets/images/profile.jpg")}
-            style={styles.profileImage}
-          />
+          <TouchableOpacity onPress={() => pickImage()}>
+            <Image
+              source={{
+                uri: image,
+              }}
+              style={styles.profileImage}
+            />
+          </TouchableOpacity>
         </View>
         <View style={styles.inputsContainer}>
           <AppTextInput placeholder="First Name" />
