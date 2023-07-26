@@ -7,9 +7,12 @@ declare global {
 }
 
 export type RootStackParamList = {
+  SignUp: undefined;
   Login: undefined;
-  OTPVerification: undefined;
-  Profile: undefined;
+  LoginOTP: undefined;
+  SignupOTP: undefined;
+  ProfileSignup: undefined;
+  ProfileLogin: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =

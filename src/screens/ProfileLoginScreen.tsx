@@ -19,11 +19,11 @@ import HeadingStyle from "../constants/HeadingStyle";
 import * as ImagePicker from "expo-image-picker";
 import dummyProfile from "../../assets/images/profile.jpg";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Profile">;
+type Props = NativeStackScreenProps<RootStackParamList, "ProfileLogin">;
 
 const dummyProfileUri = Image.resolveAssetSource(dummyProfile).uri;
 
-const ProfileScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
+const ProfileLoginScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
   const [image, setImage] = useState(dummyProfileUri);
 
   const pickImage = async () => {
@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default ProfileLoginScreen;

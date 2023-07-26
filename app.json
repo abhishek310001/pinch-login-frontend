@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "On Boarding RN",
-    "slug": "OnBoarding-React-Native-App",
+    "name": "Pinch-POC",
+    "slug": "Pinch-POC-login-feature",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
