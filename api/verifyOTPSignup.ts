@@ -4,7 +4,7 @@ interface ApiResponse {
     success: boolean;
   }
 
-const verifyOTPSignup = async (phoneNumber: string, code:string) => {
+const verifyOTPSignup = async (phoneNumber: string, code:string): Promise<any> => {
     try {
       const data = JSON.stringify({
         "phoneNumber": phoneNumber,
@@ -20,8 +20,8 @@ const verifyOTPSignup = async (phoneNumber: string, code:string) => {
         body: data,
       });
    
-      const json = await response.json();
-      return json.success;
+      const json: ApiResponse = await response.json();
+      return json;
     } catch (error) {
       console.error(error);
       return false;

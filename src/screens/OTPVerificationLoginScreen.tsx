@@ -51,7 +51,7 @@ import {
             </Text>
           </View>
           <TouchableOpacity
-            onPress={() => navigate("Profile")}
+            // onPress={() => navigate("Profile")}
             style={[BtnStyle.container, styles.loginWithOTPBtn]}
           >
             <Text style={BtnStyle.text}>Login with OTP</Text>

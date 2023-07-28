@@ -4,10 +4,11 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  ToastAndroid,
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
 import Colors from "../constants/Colors";
@@ -18,14 +19,24 @@ import BtnStyle from "../constants/BtnStyle";
 import HeadingStyle from "../constants/HeadingStyle";
 import LinkStyle from "../constants/LinkStyle";
 import verifyOTPSignup from "../../api/verifyOTPSignup";
-import OTPInputView from "@twotalltotems/react-native-otp-input";
+import OTPTextInput from "../components/OTPTextInput";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignupOTP">;
 
 const OTPVerificationSignupScreen: React.FC<Props> = ({
   navigation: { navigate },
 }) => {
-  const { phoneNumber } = require("./LoginScreen");
+  const { phoneNumber } = require("./SignUpScreen");
+  const [OTPcode, setOTPcode] = useState('')
+
+  const verifyOTP = async (code) => {
+    const res = await verifyOTPSignup(code, phoneNumber)
+    if (res.success){
+      navigate("ProfileSignup")
+    }
+    console.log(phoneNumber)
+    ToastAndroid.show(res.message,ToastAndroid.SHORT)
+  } 
 
   return (
     <SafeAreaView>
@@ -42,16 +53,11 @@ const OTPVerificationSignupScreen: React.FC<Props> = ({
           />
         </View>
         <View style={{}}>
-          <OTPInputView
-            style={{ width: "80%", height: 200 }}
-            pinCount={6}
-            autoFocusOnLoad
-            codeInputFieldStyle={styles.underlineStyleBase}
-            codeInputHighlightStyle={styles.underlineStyleHighLighted}
-            onCodeFilled={(code) => {
-              verifyOTPSignup(phoneNumber, code);
-            }}
-          />
+        <OTPTextInput
+        maxLength={6}
+        value={OTPcode}
+        onChangeText={setOTPcode}
+        placeholder="_  _  _  _  _  _" />
         </View>
         <View>
           <Text style={styles.otpInfo}>
@@ -59,7 +65,7 @@ const OTPVerificationSignupScreen: React.FC<Props> = ({
           </Text>
         </View>
         <TouchableOpacity
-          onPress={() => navigate("ProfileSignup")}
+          onPress={() => verifyOTP(OTPcode)}
           style={[BtnStyle.container, styles.loginWithOTPBtn]}
         >
           <Text style={BtnStyle.text}>Login with OTP</Text>

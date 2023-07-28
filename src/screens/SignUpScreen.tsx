@@ -23,8 +23,6 @@ import {
   
   type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
   
-  const image = require("../../assets/images/bgImage.jpg");
-  
   const SignUpScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
     const [phoneNumber, setPhoneNumber] = useState("");
   
@@ -43,6 +41,7 @@ import {
         if (res.success) {
           navigate("SignupOTP");
         }
+        console.log(res.success);
         ToastAndroid.show(res.message, ToastAndroid.SHORT);
       } else {
         ToastAndroid.show(
