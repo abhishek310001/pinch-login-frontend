@@ -11,7 +11,7 @@ const verifyOTPSignup = async (phoneNumber: string, code:string): Promise<any> =
         "otp": code
       });
    
-      const response = await fetch(`${BASE_URL}/api/accounts/phoneSignUpVerify`, {
+      const response = await fetch(`${BASE_URL}/accounts/phoneSignUpVerify`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -10,7 +10,7 @@ const sendOTPSignup = async (phoneNumber: string): Promise<any> => {
      "phoneNumber": phoneNumber,
    });
 
-   const response = await fetch(`${BASE_URL}/api/accounts/phoneLogin`, {
+   const response = await fetch(`${BASE_URL}/accounts/phoneLogin`, {
      method: "POST",
      headers: {
         "Content-Type": "application/json",

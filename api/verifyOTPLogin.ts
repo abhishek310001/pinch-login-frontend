@@ -11,7 +11,7 @@ const verifyOTPLogin = async (phoneNumber: string, code:string) => {
         code,
       });
    
-      const response = await fetch(`${BASE_URL}/api/accounts/phoneLoginVerify`, {
+      const response = await fetch(`${BASE_URL}/accounts/phoneLoginVerify`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

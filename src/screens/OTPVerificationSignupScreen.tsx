@@ -30,12 +30,17 @@ const OTPVerificationSignupScreen: React.FC<Props> = ({
   const [OTPcode, setOTPcode] = useState('')
 
   const verifyOTP = async (code) => {
-    const res = await verifyOTPSignup(code, phoneNumber)
+    if(code.length == 6){
+      const res = await verifyOTPSignup(phoneNumber, code)
     if (res.success){
       navigate("ProfileSignup")
     }
-    console.log(phoneNumber)
+    console.log(code)
     ToastAndroid.show(res.message,ToastAndroid.SHORT)
+    }
+    else {
+      ToastAndroid.show("Please enter a valid OTP", ToastAndroid.SHORT)
+    }
   } 
 
   return (
@@ -52,7 +57,7 @@ const OTPVerificationSignupScreen: React.FC<Props> = ({
             style={styles.image}
           />
         </View>
-        <View style={{}}>
+        <View>
         <OTPTextInput
         maxLength={6}
         value={OTPcode}

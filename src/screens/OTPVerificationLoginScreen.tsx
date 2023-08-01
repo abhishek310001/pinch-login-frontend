@@ -40,7 +40,7 @@ import {
               style={styles.image}
             />
           </View>
-          <View style={{}}>
+          <View>
             <OTPTextInput 
             maxLength={6}
             placeholder="_  _  _  _  _  _" />
