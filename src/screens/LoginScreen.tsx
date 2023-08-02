@@ -40,7 +40,7 @@ const LoginScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
     if (phoneNumber.length == 13) {
       const res = await sendOTPLogin(phoneNumber);
       if (res.success) {
-        navigate("LoginOTP",{phoneNumber:phoneNumber});
+        navigate("LoginOTP", { phoneNumber: phoneNumber });
       }
       ToastAndroid.show(res.message, ToastAndroid.SHORT);
     } else {

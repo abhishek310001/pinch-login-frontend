@@ -10,13 +10,20 @@ import HeadingStyle from "../constants/HeadingStyle";
 type Props = NativeStackScreenProps<RootStackParamList, "ProfileLogin">;
 
 const ProfileLoginScreen: React.FC<Props> = ({ route }) => {
-
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.headingContainer}>
           <Text style={HeadingStyle.text}>Welcome</Text>
-          <Text style={styles.headingDescription}>{route.params.firstName} {route.params.lastName}</Text>
+          <View style={styles.profileImageContainer}>
+            <Image
+              source={{ uri: route.params.imageUrl }}
+              style={styles.profileImage}
+            />
+          </View>
+          <Text style={styles.headingDescription}>
+            {route.params.firstName} {route.params.lastName}
+          </Text>
         </View>
       </View>
     </SafeAreaView>
@@ -33,10 +40,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headingDescription: {
+    marginVertical: Spacing * 2,
     fontFamily: Font["poppins-regular"],
     fontSize: FontSize.large,
     maxWidth: "80%",
     textAlign: "center",
+  },
+  profileImageContainer: {
+    marginVertical: Spacing * 2,
+    alignItems: "center",
+  },
+  profileImage: {
+    height: 100,
+    width: 100,
+    borderRadius: 150 / 2,
+    borderWidth: 3,
+    borderColor: "black",
   },
 });
 

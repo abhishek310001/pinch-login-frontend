@@ -6,19 +6,20 @@ declare global {
   }
 }
 
-type LoginInfo= {
+type LoginInfo = {
   accountId: string;
-  loginToken:  string;
-}
+  token: string;
+};
 
 type PhoneNumber = {
   phoneNumber: string;
-}
+};
 
 type ProfileParams = {
   firstName: string;
   lastName: string;
-}
+  imageUrl: string;
+};
 
 export type RootStackParamList = {
   SignUp: undefined;

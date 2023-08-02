@@ -20,12 +20,16 @@ import HeadingStyle from "../constants/HeadingStyle";
 import * as ImagePicker from "expo-image-picker";
 import DummyProfile from "../../assets/images/profile.jpg";
 import userSignUpInfo from "../../api/userSignUpInfo";
+import getProfileInfo from "../../api/getProfileInfo";
 
 type Props = NativeStackScreenProps<RootStackParamList, "ProfileSignup">;
 
 const dummyProfileUri = Image.resolveAssetSource(DummyProfile).uri;
 
-const ProfileSignupScreen: React.FC<Props> = ({ navigation: { navigate },route }) => {
+const ProfileSignupScreen: React.FC<Props> = ({
+  navigation: { navigate },
+  route,
+}) => {
   const [image, setImage] = useState(dummyProfileUri);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -59,16 +63,24 @@ const ProfileSignupScreen: React.FC<Props> = ({ navigation: { navigate },route }
       type: "image/jpeg",
       uri: image,
     });
-    console.log(route.params.accountId, route.params.loginToken, formData);
+    console.log(route.params.accountId, route.params.token, formData);
     const res = await userSignUpInfo(
       route.params.accountId,
-      route.params.loginToken,
+      route.params.token,
       formData
     );
     console.log(res.message);
     if (res.success) {
       ToastAndroid.show("Profile created successfully", ToastAndroid.SHORT);
-      navigate("ProfileLogin",{firstName: firstName, lastName: lastName});
+      const profileInfo = await getProfileInfo(
+        route.params.accountId,
+        route.params.token
+      );
+      navigate("ProfileLogin", {
+        firstName: profileInfo.first_name,
+        lastName: profileInfo.last_name,
+        imageUrl: profileInfo.profile_img,
+      });
     } else {
       ToastAndroid.show("Profile creation failed", ToastAndroid.SHORT);
     }

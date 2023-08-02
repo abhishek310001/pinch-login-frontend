@@ -4,25 +4,20 @@ interface ApiResponse {
   success: boolean;
 }
 
-const userSignUpInfo = async (
-  account_id: string,
-  token: string,
-  formData: FormData
+const getLoginToken = async (
+  accountId: string,
+  token: string
 ): Promise<any> => {
   try {
-    const data = formData;
-
     const response = await fetch(
-      `${BASE_URL}/accounts/${account_id}/tasks/edit-account-info?account_id=${account_id}`,
+      `${BASE_URL}/accounts/${accountId}/tasks/account-info?account_id=${accountId}`,
       {
-        method: "POST",
+        method: "GET",
         headers: {
-          "Content-Type": "multipart/form-data",
+          // "Content-Type": "application/json",
+          // Accept: "application/json",
           Authorization: `Bearer ${token}`,
-          Accept: "application/json",
         },
-
-        body: data,
       }
     );
     const json: ApiResponse = await response.json();
@@ -33,4 +28,4 @@ const userSignUpInfo = async (
   }
 };
 
-export default userSignUpInfo;
+export default getLoginToken;

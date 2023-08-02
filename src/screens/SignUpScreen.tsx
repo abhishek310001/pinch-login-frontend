@@ -38,7 +38,7 @@ const SignUpScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
     if (phoneNumber.length == 13) {
       const res = await SignupOTP(phoneNumber);
       if (res.success) {
-        navigate("SignupOTP",{phoneNumber: phoneNumber});
+        navigate("SignupOTP", { phoneNumber: phoneNumber });
       }
       console.log(res.success);
       ToastAndroid.show(res.message, ToastAndroid.SHORT);

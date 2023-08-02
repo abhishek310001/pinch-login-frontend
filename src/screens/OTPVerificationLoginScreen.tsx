@@ -21,11 +21,13 @@ import HeadingStyle from "../constants/HeadingStyle";
 import LinkStyle from "../constants/LinkStyle";
 import verifyOTPLogin from "../../api/verifyOTPLogin";
 import getLoginToken from "../../api/getLoginToken";
+import getProfileInfo from "../../api/getProfileInfo";
 
 type Props = NativeStackScreenProps<RootStackParamList, "LoginOTP">;
 
 const OTPVerificationLoginScreen: React.FC<Props> = ({
-  navigation: { navigate }, route
+  navigation: { navigate },
+  route,
 }) => {
   const [OTPcode, setOTPcode] = useState("");
   const phoneNumber = route.params.phoneNumber;
@@ -35,8 +37,15 @@ const OTPVerificationLoginScreen: React.FC<Props> = ({
       const res = await verifyOTPLogin(phoneNumber, code);
       if (res.success) {
         const loginInfo = await getLoginToken(phoneNumber);
-        module.exports.loginInfo = loginInfo;
-        navigate("ProfileLogin",{firstName: "First Name", lastName: "Last Name"});
+        const profileInfo = await getProfileInfo(
+          loginInfo.accountId,
+          loginInfo.token
+        );
+        navigate("ProfileLogin", {
+          firstName: profileInfo.first_name,
+          lastName: profileInfo.last_name,
+          imageUrl: profileInfo.profile_img,
+        });
       }
       console.log(code);
       ToastAndroid.show(res.message, ToastAndroid.SHORT);
