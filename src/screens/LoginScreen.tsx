@@ -20,8 +20,6 @@ import sendOTPLogin from "../../api/sendOTPLogin";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
-const image = require("../../assets/images/bgImage.jpg");
-
 const LoginScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
 
