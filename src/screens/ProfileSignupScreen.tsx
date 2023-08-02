@@ -3,7 +3,6 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
-  TextInput,
   ToastAndroid,
   TouchableOpacity,
   View,
@@ -42,8 +41,6 @@ const ProfileSignupScreen: React.FC<Props> = ({
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
@@ -63,13 +60,11 @@ const ProfileSignupScreen: React.FC<Props> = ({
       type: "image/jpeg",
       uri: image,
     });
-    console.log(route.params.accountId, route.params.token, formData);
     const res = await userSignUpInfo(
       route.params.accountId,
       route.params.token,
       formData
     );
-    console.log(res.message);
     if (res.success) {
       ToastAndroid.show("Profile created successfully", ToastAndroid.SHORT);
       const profileInfo = await getProfileInfo(

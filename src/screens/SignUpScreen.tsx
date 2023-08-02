@@ -1,10 +1,7 @@
 import {
-  ImageBackground,
-  Linking,
   SafeAreaView,
   StyleSheet,
   Text,
-  TextInput,
   ToastAndroid,
   TouchableOpacity,
   View,
@@ -40,7 +37,6 @@ const SignUpScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
       if (res.success) {
         navigate("SignupOTP", { phoneNumber: phoneNumber });
       }
-      console.log(res.success);
       ToastAndroid.show(res.message, ToastAndroid.SHORT);
     } else {
       ToastAndroid.show(

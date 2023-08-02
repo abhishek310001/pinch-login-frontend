@@ -3,7 +3,6 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
-  TextInput,
   ToastAndroid,
   TouchableOpacity,
   View,
@@ -41,7 +40,6 @@ const OTPVerificationSignupScreen: React.FC<Props> = ({
           token: loginInfo.token,
         });
       }
-      console.log(code);
       ToastAndroid.show(res.message, ToastAndroid.SHORT);
     } else {
       ToastAndroid.show("Please enter a valid OTP", ToastAndroid.SHORT);

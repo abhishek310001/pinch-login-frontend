@@ -1,10 +1,7 @@
 import {
-  ImageBackground,
-  Linking,
   SafeAreaView,
   StyleSheet,
   Text,
-  TextInput,
   ToastAndroid,
   TouchableOpacity,
   View,
