@@ -38,10 +38,9 @@ const LoginScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
 
   const isValidPhoneNumber = async () => {
     if (phoneNumber.length == 13) {
-      module.exports.phoneNumber = phoneNumber;
       const res = await sendOTPLogin(phoneNumber);
       if (res.success) {
-        navigate("LoginOTP");
+        navigate("LoginOTP",{phoneNumber:phoneNumber});
       }
       ToastAndroid.show(res.message, ToastAndroid.SHORT);
     } else {

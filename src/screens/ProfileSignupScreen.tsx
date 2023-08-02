@@ -25,12 +25,11 @@ type Props = NativeStackScreenProps<RootStackParamList, "ProfileSignup">;
 
 const dummyProfileUri = Image.resolveAssetSource(DummyProfile).uri;
 
-const ProfileSignupScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
+const ProfileSignupScreen: React.FC<Props> = ({ navigation: { navigate },route }) => {
   const [image, setImage] = useState(dummyProfileUri);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const { loginInfo } = require("./OTPVerificationSignupScreen");
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -55,17 +54,21 @@ const ProfileSignupScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
     formData.append("first_name", firstName);
     formData.append("last_name", lastName);
     formData.append("email", email);
-    formData.append("profile_img", image);
-    console.log(loginInfo.accountId, loginInfo.token, formData);
+    formData.append("profile_img", {
+      name: "profile_img",
+      type: "image/jpeg",
+      uri: image,
+    });
+    console.log(route.params.accountId, route.params.loginToken, formData);
     const res = await userSignUpInfo(
-      loginInfo.accountId,
-      loginInfo.token,
+      route.params.accountId,
+      route.params.loginToken,
       formData
     );
     console.log(res.message);
     if (res.success) {
       ToastAndroid.show("Profile created successfully", ToastAndroid.SHORT);
-      navigate("ProfileLogin");
+      navigate("ProfileLogin",{firstName: firstName, lastName: lastName});
     } else {
       ToastAndroid.show("Profile creation failed", ToastAndroid.SHORT);
     }

@@ -25,9 +25,9 @@ import getLoginToken from "../../api/getLoginToken";
 type Props = NativeStackScreenProps<RootStackParamList, "SignupOTP">;
 
 const OTPVerificationSignupScreen: React.FC<Props> = ({
-  navigation: { navigate },
+  navigation: { navigate }, route
 }) => {
-  const { phoneNumber } = require("./SignUpScreen");
+  const phoneNumber = route.params.phoneNumber;
   const [OTPcode, setOTPcode] = useState("");
 
   const verifyOTP = async (code) => {
@@ -35,8 +35,7 @@ const OTPVerificationSignupScreen: React.FC<Props> = ({
       const res = await verifyOTPSignup(phoneNumber, code);
       if (res.success) {
         const loginInfo = await getLoginToken(phoneNumber);
-        module.exports.loginInfo = loginInfo;
-        navigate("ProfileSignup");
+        navigate("ProfileSignup",{accountId: loginInfo.accountId, loginToken: loginInfo.token});
       }
       console.log(code);
       ToastAndroid.show(res.message, ToastAndroid.SHORT);

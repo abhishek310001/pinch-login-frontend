@@ -9,15 +9,14 @@ import HeadingStyle from "../constants/HeadingStyle";
 
 type Props = NativeStackScreenProps<RootStackParamList, "ProfileLogin">;
 
-const ProfileLoginScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
-  const { phoneNumber } = require("./LoginScreen");
+const ProfileLoginScreen: React.FC<Props> = ({ route }) => {
 
   return (
     <SafeAreaView>
       <View style={styles.container}>
         <View style={styles.headingContainer}>
           <Text style={HeadingStyle.text}>Welcome</Text>
-          <Text style={styles.headingDescription}>{phoneNumber}</Text>
+          <Text style={styles.headingDescription}>{route.params.firstName} {route.params.lastName}</Text>
         </View>
       </View>
     </SafeAreaView>
