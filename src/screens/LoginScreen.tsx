@@ -19,7 +19,7 @@ import { RootStackParamList } from "../types";
 import MobileNumberInput from "../components/MobileNumberInput";
 import BtnStyle from "../constants/BtnStyle";
 import HeadingStyle from "../constants/HeadingStyle";
-import sendOTPLogin from "../../api/sendOTPLogin"
+import sendOTPLogin from "../../api/sendOTPLogin";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Login">;
 
@@ -83,14 +83,8 @@ const LoginScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
           >
             <Text style={BtnStyle.text}>Send OTP</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              navigate("SignUp")
-            }
-          >
-            <Text style={styles.helpText}>
-              New User? Sign Up Here
-            </Text>
+          <TouchableOpacity onPress={() => navigate("SignUp")}>
+            <Text style={styles.helpText}>New User? Sign Up Here</Text>
           </TouchableOpacity>
         </View>
       </View>

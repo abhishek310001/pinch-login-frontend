@@ -20,6 +20,7 @@ import HeadingStyle from "../constants/HeadingStyle";
 import LinkStyle from "../constants/LinkStyle";
 import verifyOTPSignup from "../../api/verifyOTPSignup";
 import OTPTextInput from "../components/OTPTextInput";
+import getLoginToken from "../../api/getLoginToken";
 
 type Props = NativeStackScreenProps<RootStackParamList, "SignupOTP">;
 
@@ -27,21 +28,22 @@ const OTPVerificationSignupScreen: React.FC<Props> = ({
   navigation: { navigate },
 }) => {
   const { phoneNumber } = require("./SignUpScreen");
-  const [OTPcode, setOTPcode] = useState('')
+  const [OTPcode, setOTPcode] = useState("");
 
   const verifyOTP = async (code) => {
-    if(code.length == 6){
-      const res = await verifyOTPSignup(phoneNumber, code)
-    if (res.success){
-      navigate("ProfileSignup")
+    if (code.length == 6) {
+      const res = await verifyOTPSignup(phoneNumber, code);
+      if (res.success) {
+        const loginInfo = await getLoginToken(phoneNumber);
+        module.exports.loginInfo = loginInfo;
+        navigate("ProfileSignup");
+      }
+      console.log(code);
+      ToastAndroid.show(res.message, ToastAndroid.SHORT);
+    } else {
+      ToastAndroid.show("Please enter a valid OTP", ToastAndroid.SHORT);
     }
-    console.log(code)
-    ToastAndroid.show(res.message,ToastAndroid.SHORT)
-    }
-    else {
-      ToastAndroid.show("Please enter a valid OTP", ToastAndroid.SHORT)
-    }
-  } 
+  };
 
   return (
     <SafeAreaView>
@@ -58,11 +60,12 @@ const OTPVerificationSignupScreen: React.FC<Props> = ({
           />
         </View>
         <View>
-        <OTPTextInput
-        maxLength={6}
-        value={OTPcode}
-        onChangeText={setOTPcode}
-        placeholder="_  _  _  _  _  _" />
+          <OTPTextInput
+            maxLength={6}
+            value={OTPcode}
+            onChangeText={setOTPcode}
+            placeholder="_  _  _  _  _  _"
+          />
         </View>
         <View>
           <Text style={styles.otpInfo}>

@@ -1,30 +1,30 @@
-import { BASE_URL } from '@env'
+import { BASE_URL } from "@env";
 
 interface ApiResponse {
-    success: boolean;
-  }
+  success: boolean;
+}
 
 const sendOTPSignup = async (phoneNumber: string): Promise<any> => {
- try {
-   const data = JSON.stringify({
-     "phoneNumber": phoneNumber,
-   });
+  try {
+    const data = JSON.stringify({
+      phoneNumber: phoneNumber,
+    });
 
-   const response = await fetch(`${BASE_URL}/accounts/phoneLogin`, {
-     method: "POST",
-     headers: {
+    const response = await fetch(`${BASE_URL}/access-tokens/phoneLogin`, {
+      method: "POST",
+      headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json",
-     },
-     
-     body: data,
-   });
-   const json: ApiResponse = await response.json();
-   return json;
- } catch (error) {
-   console.error(error);
-   return false;
- }
+        Accept: "application/json",
+      },
+
+      body: data,
+    });
+    const json: ApiResponse = await response.json();
+    return json;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 };
 
-export default sendOTPSignup
+export default sendOTPSignup;

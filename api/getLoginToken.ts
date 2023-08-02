@@ -4,13 +4,13 @@ interface ApiResponse {
   success: boolean;
 }
 
-const sendOTPSignup = async (phoneNumber: string): Promise<any> => {
+const getLoginToken = async (phoneNumber: string): Promise<any> => {
   try {
     const data = JSON.stringify({
       phoneNumber: phoneNumber,
     });
 
-    const response = await fetch(`${BASE_URL}/accounts/phoneSignUp`, {
+    const response = await fetch(`${BASE_URL}/access-tokens/phoneLoginToken`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,4 +27,4 @@ const sendOTPSignup = async (phoneNumber: string): Promise<any> => {
   }
 };
 
-export default sendOTPSignup;
+export default getLoginToken;
