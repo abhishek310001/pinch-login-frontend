@@ -57,7 +57,6 @@ const ProfileSignupScreen: React.FC<Props> = ({
     formDetails.append("first_name", firstName);
     formDetails.append("last_name", lastName);
     formDetails.append("email", email);
-    console.log(imagePicked)
     if (imagePicked) {
       formDetails.append("profile_img", {
         name: "profile.jpg",

@@ -40,7 +40,6 @@ const OTPVerificationLoginScreen: React.FC<Props> = ({
           loginInfo.accountId,
           loginInfo.token
         );
-        console.log(profileInfo.first_name,profileInfo.last_name,profileInfo.profile_img);
         navigate("ProfileLogin", {
           firstName: profileInfo.first_name,
           lastName: profileInfo.last_name,
