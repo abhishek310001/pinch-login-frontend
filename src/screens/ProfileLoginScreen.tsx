@@ -12,8 +12,8 @@ type Props = StackScreenProps<RootStackParamList, "ProfileLogin">;
 
 const ProfileLoginScreen: React.FC<Props> = ({ route }) => {
   const dummyProfileUri = Image.resolveAssetSource(DummyProfile).uri;
-  const profileImage = route.params.profileImage
-    ? route.params.profileImage
+  const profileImage = route.params.imageUrl
+    ? route.params.imageUrl
     : dummyProfileUri;
 
   return (

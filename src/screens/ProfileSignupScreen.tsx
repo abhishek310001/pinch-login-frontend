@@ -63,7 +63,6 @@ const ProfileSignupScreen: React.FC<Props> = ({
         name: "profile.jpg",
         type: "image/jpg",
       });
-      };
     }
     const res = await userSignUpInfo(
       route.params.accountId,
