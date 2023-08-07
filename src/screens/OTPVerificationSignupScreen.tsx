@@ -77,7 +77,7 @@ const OTPVerificationSignupScreen: React.FC<Props> = ({
           onPress={() => verifyOTP(OTPcode)}
           style={[BtnStyle.container, styles.loginWithOTPBtn]}
         >
-          <Text style={BtnStyle.text}>Login with OTP</Text>
+          <Text style={BtnStyle.text}>SignUp with OTP</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.primaryLink}>
           <Text style={LinkStyle.primary}>Resend OTP</Text>

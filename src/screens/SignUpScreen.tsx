@@ -77,7 +77,9 @@ const SignUpScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
           >
             <Text style={BtnStyle.text}>Send OTP</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigate("Login",{phoneNumber: phoneNumber})}>
+          <TouchableOpacity
+            onPress={() => navigate("Login", { phoneNumber: phoneNumber })}
+          >
             <Text style={styles.helpText}>Already Have an account? LogIn</Text>
           </TouchableOpacity>
         </View>

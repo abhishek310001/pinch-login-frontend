@@ -30,7 +30,7 @@ const ProfileSignupScreen: React.FC<Props> = ({
   navigation: { navigate },
   route,
 }) => {
-  const [image, setImage] = useState<String>(dummyProfileUri);
+  const [image, setImage] = useState(dummyProfileUri);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -57,11 +57,12 @@ const ProfileSignupScreen: React.FC<Props> = ({
     formDetails.append("first_name", firstName);
     formDetails.append("last_name", lastName);
     formDetails.append("email", email);
+    console.log(imagePicked)
     if (imagePicked) {
-      formDetails.append("profile_img",{
-        uri: image,
+      formDetails.append("profile_img", {
         name: "profile.jpg",
-        type: "image/jpg",
+        type: "image/jpeg",
+        uri: image,
       });
     }
     const res = await userSignUpInfo(
