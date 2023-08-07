@@ -1,4 +1,4 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 
 declare global {
   namespace ReactNavigation {
@@ -23,7 +23,7 @@ type ProfileParams = {
 
 export type RootStackParamList = {
   SignUp: undefined;
-  Login: undefined;
+  Login: PhoneNumber;
   LoginOTP: PhoneNumber;
   SignupOTP: PhoneNumber;
   ProfileSignup: LoginInfo;
@@ -31,4 +31,4 @@ export type RootStackParamList = {
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
-  NativeStackScreenProps<RootStackParamList, Screen>;
+  StackScreenProps<RootStackParamList, Screen>;

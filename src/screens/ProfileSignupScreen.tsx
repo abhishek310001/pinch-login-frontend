@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
 import Font from "../constants/Font";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
 import AppTextInput from "../components/AppTextInput";
 import BtnStyle from "../constants/BtnStyle";
@@ -21,15 +21,16 @@ import DummyProfile from "../../assets/images/profile.jpg";
 import userSignUpInfo from "../../api/userSignUpInfo";
 import getProfileInfo from "../../api/getProfileInfo";
 
-type Props = NativeStackScreenProps<RootStackParamList, "ProfileSignup">;
+type Props = StackScreenProps<RootStackParamList, "ProfileSignup">;
 
 const dummyProfileUri = Image.resolveAssetSource(DummyProfile).uri;
+let imagePicked = false;
 
 const ProfileSignupScreen: React.FC<Props> = ({
   navigation: { navigate },
   route,
 }) => {
-  const [image, setImage] = useState(dummyProfileUri);
+  const [image, setImage] = useState<String>(dummyProfileUri);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -42,6 +43,7 @@ const ProfileSignupScreen: React.FC<Props> = ({
     });
 
     if (!result.canceled) {
+      imagePicked = true;
       setImage(result.assets[0].uri);
     }
   };
@@ -51,19 +53,22 @@ const ProfileSignupScreen: React.FC<Props> = ({
       ToastAndroid.show("Please fill all the fields", ToastAndroid.SHORT);
       return;
     }
-    const formData = new FormData();
-    formData.append("first_name", firstName);
-    formData.append("last_name", lastName);
-    formData.append("email", email);
-    formData.append("profile_img", {
-      name: "profile_img",
-      type: "image/jpeg",
-      uri: image,
-    });
+    const formDetails = new FormData();
+    formDetails.append("first_name", firstName);
+    formDetails.append("last_name", lastName);
+    formDetails.append("email", email);
+    if (imagePicked) {
+      formDetails.append("profile_img",{
+        uri: image,
+        name: "profile.jpg",
+        type: "image/jpg",
+      });
+      };
+    }
     const res = await userSignUpInfo(
       route.params.accountId,
       route.params.token,
-      formData
+      formDetails
     );
     if (res.success) {
       ToastAndroid.show("Profile created successfully", ToastAndroid.SHORT);

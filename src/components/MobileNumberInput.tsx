@@ -25,7 +25,7 @@ const MobileNumberInput: React.FC<TextInputProps> = ({ ...otherProps }) => {
           backgroundColor: Colors.lightPrimary,
           borderRadius: Spacing,
           marginVertical: Spacing,
-          letterSpacing: Spacing * 1.5,
+          letterSpacing: Spacing,
         },
         focused && {
           borderWidth: 3,

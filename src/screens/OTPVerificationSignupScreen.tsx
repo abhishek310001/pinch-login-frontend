@@ -12,7 +12,7 @@ import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
 import Colors from "../constants/Colors";
 import Font from "../constants/Font";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
 import BtnStyle from "../constants/BtnStyle";
 import HeadingStyle from "../constants/HeadingStyle";
@@ -21,7 +21,7 @@ import verifyOTPSignup from "../../api/verifyOTPSignup";
 import OTPTextInput from "../components/OTPTextInput";
 import getLoginToken from "../../api/getLoginToken";
 
-type Props = NativeStackScreenProps<RootStackParamList, "SignupOTP">;
+type Props = StackScreenProps<RootStackParamList, "SignupOTP">;
 
 const OTPVerificationSignupScreen: React.FC<Props> = ({
   navigation: { navigate },

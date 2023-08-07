@@ -12,7 +12,7 @@ import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
 import Colors from "../constants/Colors";
 import Font from "../constants/Font";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
 import OTPTextInput from "../components/OTPTextInput";
 import BtnStyle from "../constants/BtnStyle";
@@ -22,7 +22,7 @@ import verifyOTPLogin from "../../api/verifyOTPLogin";
 import getLoginToken from "../../api/getLoginToken";
 import getProfileInfo from "../../api/getProfileInfo";
 
-type Props = NativeStackScreenProps<RootStackParamList, "LoginOTP">;
+type Props = StackScreenProps<RootStackParamList, "LoginOTP">;
 
 const OTPVerificationLoginScreen: React.FC<Props> = ({
   navigation: { navigate },
@@ -33,20 +33,21 @@ const OTPVerificationLoginScreen: React.FC<Props> = ({
 
   const verifyOTP = async (code) => {
     if (code.length == 6) {
-      const res = await verifyOTPLogin(phoneNumber, code);
+      const res:any = await verifyOTPLogin(phoneNumber, code);
       if (res.success) {
         const loginInfo = await getLoginToken(phoneNumber);
         const profileInfo = await getProfileInfo(
           loginInfo.accountId,
           loginInfo.token
         );
+        console.log(profileInfo.first_name,profileInfo.last_name,profileInfo.profile_img);
         navigate("ProfileLogin", {
           firstName: profileInfo.first_name,
           lastName: profileInfo.last_name,
           imageUrl: profileInfo.profile_img,
         });
       }
-      ToastAndroid.show(res.message, ToastAndroid.SHORT);
+      ToastAndroid.show("Login Successful", ToastAndroid.SHORT);
     } else {
       ToastAndroid.show("Please enter a valid OTP", ToastAndroid.SHORT);
     }
@@ -89,7 +90,7 @@ const OTPVerificationLoginScreen: React.FC<Props> = ({
           <Text style={LinkStyle.primary}>Resend OTP</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigate("Login")}
+          onPress={() => navigate("Login", { phoneNumber: phoneNumber})}
           style={styles.secondaryLink}
         >
           <Text style={LinkStyle.secondary}>

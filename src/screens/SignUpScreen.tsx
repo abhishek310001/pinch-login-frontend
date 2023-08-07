@@ -11,14 +11,14 @@ import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
 import Colors from "../constants/Colors";
 import Font from "../constants/Font";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
 import MobileNumberInput from "../components/MobileNumberInput";
 import BtnStyle from "../constants/BtnStyle";
 import HeadingStyle from "../constants/HeadingStyle";
 import SignupOTP from "../../api/sendOTPSignup";
 
-type Props = NativeStackScreenProps<RootStackParamList, "SignUp">;
+type Props = StackScreenProps<RootStackParamList, "SignUp">;
 
 const SignUpScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -77,7 +77,7 @@ const SignUpScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
           >
             <Text style={BtnStyle.text}>Send OTP</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigate("Login")}>
+          <TouchableOpacity onPress={() => navigate("Login",{phoneNumber: phoneNumber})}>
             <Text style={styles.helpText}>Already Have an account? LogIn</Text>
           </TouchableOpacity>
         </View>

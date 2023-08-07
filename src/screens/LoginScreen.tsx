@@ -11,17 +11,17 @@ import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
 import Colors from "../constants/Colors";
 import Font from "../constants/Font";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
 import MobileNumberInput from "../components/MobileNumberInput";
 import BtnStyle from "../constants/BtnStyle";
 import HeadingStyle from "../constants/HeadingStyle";
 import sendOTPLogin from "../../api/sendOTPLogin";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Login">;
+type Props = StackScreenProps<RootStackParamList, "Login">;
 
-const LoginScreen: React.FC<Props> = ({ navigation: { navigate } }) => {
-  const [phoneNumber, setPhoneNumber] = useState("");
+const LoginScreen: React.FC<Props> = ({ navigation: { navigate }, route }) => {
+  const [phoneNumber, setPhoneNumber] = useState(route.params.phoneNumber);
 
   const handleChange = (e: any) => {
     if (phoneNumber.includes("+")) {

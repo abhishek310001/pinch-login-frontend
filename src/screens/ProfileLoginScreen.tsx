@@ -3,13 +3,19 @@ import React from "react";
 import Spacing from "../constants/Spacing";
 import FontSize from "../constants/FontSize";
 import Font from "../constants/Font";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 import { RootStackParamList } from "../types";
 import HeadingStyle from "../constants/HeadingStyle";
+import DummyProfile from "../../assets/images/profile.jpg";
 
-type Props = NativeStackScreenProps<RootStackParamList, "ProfileLogin">;
+type Props = StackScreenProps<RootStackParamList, "ProfileLogin">;
 
 const ProfileLoginScreen: React.FC<Props> = ({ route }) => {
+  const dummyProfileUri = Image.resolveAssetSource(DummyProfile).uri;
+  const profileImage = route.params.profileImage
+    ? route.params.profileImage
+    : dummyProfileUri;
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
@@ -17,7 +23,7 @@ const ProfileLoginScreen: React.FC<Props> = ({ route }) => {
           <Text style={HeadingStyle.text}>Welcome</Text>
           <View style={styles.profileImageContainer}>
             <Image
-              source={{ uri: route.params.imageUrl }}
+              source={{ uri: profileImage }}
               style={styles.profileImage}
             />
           </View>
