@@ -16,7 +16,7 @@ const container = {
   shadowOpacity: 0.3,
   shadowRadius: Spacing,
 };
-const text = {
+const text: any = {
   fontFamily: Font["poppins-bold"],
   color: Colors.onPrimary,
   textAlign: "center",

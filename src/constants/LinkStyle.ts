@@ -2,7 +2,7 @@ import Colors from "./Colors";
 import Font from "./Font";
 import FontSize from "./FontSize";
 
-const primary = {
+const primary: any = {
   fontFamily: Font["poppins-bold"],
   color: Colors.text,
   textAlign: "center",
@@ -10,7 +10,7 @@ const primary = {
   textDecorationLine: "underline",
 };
 
-const secondary = {
+const secondary: any = {
   fontFamily: Font["poppins-semiBold"],
   color: Colors.text,
   textAlign: "center",

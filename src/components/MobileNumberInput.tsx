@@ -1,9 +1,7 @@
 import {
   StyleSheet,
-  Text,
   TextInput,
   TextInputProps,
-  View,
 } from "react-native";
 import React, { useState } from "react";
 import Colors from "../constants/Colors";
@@ -27,7 +25,7 @@ const MobileNumberInput: React.FC<TextInputProps> = ({ ...otherProps }) => {
           backgroundColor: Colors.lightPrimary,
           borderRadius: Spacing,
           marginVertical: Spacing,
-          letterSpacing: Spacing * 1.5,
+          letterSpacing: Spacing,
         },
         focused && {
           borderWidth: 3,
